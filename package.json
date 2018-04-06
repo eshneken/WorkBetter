@@ -1,0 +1,16 @@
+{
+    "name": "ES-Workbetter-JET",
+    "version": "0.0.1",
+    "description": "Workbetter App",
+    "author": "ed.shnekendorf@oracle.com",
+    "scripts": {
+        "prepublish": "zip -r target/workbetter-jet.zip node_modules doc_root manifest.json *.js"
+    },
+    "dependencies": {
+        "body-parser": "^1.15.1",
+        "express": "^4.13.4"
+    },
+    "engines": {
+        "node": ">=0.12.0"
+    }
+}

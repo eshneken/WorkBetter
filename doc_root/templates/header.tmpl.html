@@ -1,0 +1,115 @@
+<!-- 
+   JET V1.1 appheader template
+   - uses demo-appheader-classic style class
+   - Contains three main areas: appname/logo, global navigation, and application navigation.
+-->
+<div class="demo-appheader">
+    <div class="oj-row demo-appheader-classic">
+        <div class="oj-col demo-appheader-col">
+            <div class="oj-row">
+
+                <!-- Button that toggles off-canvas content. -->  
+                <div class="demo-offcanvas-toggle">
+                        <button class="oj-button-half-chrome demo-appheader-toggle-button oj-button oj-component oj-enabled oj-default oj-button-icon-only oj-component-initnode" data-bind="click:toggleAppDrawer,
+			     ojComponent: {component:'ojButton', label: offScreenButtonLabel, display: 'icons', icons: {start: offScreenButtonIconClass}} " role="button" title="offscreen-toggle"><span class="oj-button-icon oj-start oj-fwk-icon oj-fwk-icon-hamburger"></span><span class="oj-button-text oj-helper-hidden-accessible">offscreen-toggle</span></button>
+                </div>
+
+                <!-- logo -->  
+                <div class="demo-appheader-logo" >
+                    <!-- TODO: PU: for unknown reason 'oj-sm-only-hide' does not work for logo, had to databind style attribute as workaround -->
+                    <div class="demo-appheader-logo-block oj-sm-only-hide" data-bind="style: { display: $root.smallOnly() ? 'none' : 'inline-block'}">
+                        <span role="img" class="oj-icon demo-appheader-logo-oracle" title="Oracle Logo" alt="Oracle Logo"></span>  
+                    </div>
+
+                    <div class="demo-appheader-appname-block" style="display: inline-block">
+                        <span class="demo-appheader-appname" data-bind="text: $root.smallOnly() ? ($root.router.stateId() === 'dashboard' ? 'Dashboard' : 'People') : appName, css: {'demo-employee-name-person-detail-phone' : $root.smallOnly() == true}"></span>
+                    </div>
+                </div>
+
+                <!-- Toolbar -->  
+                <div id='demoAppheaderMenuAndToolbarContainer' class="demo-appheader-menuandtoolbar-container oj-sm-only-hide">
+
+                    <div id='demoAppheaderMenuContainer'>
+                        <ul id="demoAppheaderGlobalNavMenuId" data-bind="ojComponent: {component: 'ojMenu', select: menuItemSelect}" style="display:none">
+                            <!-- ko foreach: globalNavItems -->
+                            <li data-bind="attr: {id: label}"> <a data-bind="text: label, href: url"> <span class=""></span>  </a></li>
+                            <!-- /ko -->
+                        </ul>
+                    </div>
+                    <div style="display:none;" id="aboutDialog" title="About JET WorkBetter" 
+                         data-bind="ojComponent:{component: 'ojDialog', 
+                                     initialVisibility: 'hide',
+                                     rootAttributes: { style: 'width: 320px; height: 620px'}
+                                     }" style: >   <!--   -->
+                        <div class="oj-dialog-body">
+                            The Oracle JET WorkBetter application is meant as an example of how to setup a 
+                            Single-Page-Application(SPA)<br/><br/>
+                            It contains examples for working with the ojModule and ojRouting feature for template and paging support.
+                            It incorporates responsive design patterns to work at all Oracle JET Media Query sizes for Desktop, Tablet(portrait and landscape), and phone.<br/><br/>
+                            Please refer to in code comments for more information. For a full reference on what can be done with the JET framework, please visit the <a href='http://jet.us.orale.com'>JET Website</a>
+                        </div>
+                        <div class="oj-dialog-footer">
+                            <div id="footer" data-bind="ojModule: {name: 'footer'}"> </div>
+                        </div>
+                    </div>
+                    <div class="demo-appheader-toolbar-container">
+
+                            <div class="demo-appheader-toolbar oj-toolbar-no-chrome oj-toolbar oj-component oj-component-initnode" aria-controls="player" data-bind="ojComponent: {component:'ojToolbar'}" role="toolbar">
+
+                            <!-- ko foreach: toolbarButtons -->
+                                <button class="oj-button-half-chrome demo-appheader-toolbar-button oj-button oj-component oj-enabled oj-default oj-button-icon-only oj-component-initnode" data-bind="
+			         ojComponent: {component:'ojButton', label: label, display: 'icons', icons: {start: iconClass}} " role="button" title="toolbar_search_button" tabindex="0"><span class="oj-button-icon oj-start oj-fwk-icon-magnifier oj-fwk-icon"></span><span class="oj-button-text oj-helper-hidden-accessible">toolbar_search_button</span></button>
+                            <!-- /ko -->
+
+                            <!-- This is how to add a separator to the toolbar.  
+                                 Be sure to include the role and aria-orientation as shown to make it accessible.  -->
+                            <span role="separator" aria-orientation="vertical" class="oj-toolbar-separator demo-appheader-toolbar-separator"></span>
+
+                            <!-- This pulldown menu is used for wider screens -->
+                                <button id="menuButton" class="oj-button-half-chrome demo-appheader-pulldown-normal oj-button oj-component oj-enabled oj-default oj-button-text-icon-end oj-component-initnode" data-bind="ojComponent: { component: 'ojButton', label: userName, menu: '#demoAppheaderGlobalNavMenuId'}" role="button" aria-haspopup="true" tabindex="-1"><span class="oj-button-text">john.hancock@oracle.com</span><span class="oj-button-icon oj-end oj-component-icon oj-button-menu-dropdown-icon"></span></button>
+
+                            <!-- This pulldown menu is used for narrower screens -->
+                                <button id="menuButton2" class="oj-button-half-chrome demo-appheader-pulldown-small oj-button oj-component oj-enabled oj-default oj-button-icons-only oj-component-initnode" data-bind="ojComponent: { component: 'ojButton', 
+                                 label: 'Avatar', 
+                                 display: 'icons',
+                                 icons: {start:'oj-icon demo-appheader-avatar'},
+                                 menu: '#demoAppheaderGlobalNavMenuId'
+                                 }" role="button" title="Avatar" aria-haspopup="true" tabindex="-1"><span class="oj-button-icon oj-start oj-icon demo-appheader-avatar"></span><span class="oj-button-text oj-helper-hidden-accessible">Avatar</span><span class="oj-button-icon oj-end oj-component-icon oj-button-menu-dropdown-icon"></span></button>
+
+                        </div>
+
+                    </div>
+                </div>  <!-- demoAppheaderMenuAndToolbarContainer -->
+
+                <!-- Application Navigation -->
+                <!-- Responsive layout is enabled using the oj-med-condense and oj-med-justify-content-flex-end classes. -->
+                <div>
+                        <div id="ojAppNav2" class="demo-appheader-nav oj-lg-condense oj-lg-justify-content-center oj-xl-condense oj-xl-justify-content-flex-end oj-navigationlist oj-navigationlist-expanded oj-navigationlist-horizontal oj-component-initnode" data-bind="ojComponent: {component: 'ojNavigationList', 
+                          drillMode: 'none', 
+                          edge: 'top', 
+                          selection: $root.router.stateId(),
+                          data: dataSource,
+                          optionChange: $root.optionChangeHandler,
+                          item: { template: 'app_nav_template'}
+                          }" 
+                         aria-label="Choose only one navigation element">
+                    </div>
+                </div>
+            </div> <!-- oj-row -->
+        </div> <!-- oj-col -->
+    </div> <!-- oj-row -->
+</div> <!-- demo-appheader -->
+
+
+<!-- template for rendering app nav data -->
+<script type="text/html" id="app_nav_template">
+    <li data-bind="css:{'oj-disabled' : $data['disabled'] == 'true'}">
+        <a href="#">
+            <span 
+                data-bind="css: $data['iconClass']">
+            </span>
+            <!-- ko text: $data['name'] --> <!--/ko-->
+        </a>
+    </li>    
+</script>
+
